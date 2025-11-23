@@ -97,13 +97,16 @@ function addMarker(latlng, customText = '') {
         draggable: true
     }).addTo(map);
     
+    // Store index before pushing to array
+    const markerIndex = markers.length;
+    
     const popupContent = `
         <div class="marker-popup">
             <h4>📍 标记点</h4>
             <p><strong>纬度:</strong> ${latlng.lat.toFixed(6)}</p>
             <p><strong>经度:</strong> ${latlng.lng.toFixed(6)}</p>
             ${customText ? `<p>${customText}</p>` : ''}
-            <button onclick="removeMarker(${markers.length})" style="margin-top: 8px; padding: 4px 8px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer;">删除</button>
+            <button onclick="removeMarker(${markerIndex})" style="margin-top: 8px; padding: 4px 8px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer;">删除</button>
         </div>
     `;
     
@@ -412,21 +415,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Geometry utility for area calculation
+// Earth's radius in meters
+const EARTH_RADIUS = 6378137.0;
+
 L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
     geodesicArea: function (latLngs) {
-        var pointsCount = latLngs.length,
-            area = 0.0,
-            d2r = Math.PI / 180,
-            p1, p2;
+        const pointsCount = latLngs.length;
+        let area = 0.0;
+        const d2r = Math.PI / 180;
+        let p1, p2;
 
         if (pointsCount > 2) {
-            for (var i = 0; i < pointsCount; i++) {
+            for (let i = 0; i < pointsCount; i++) {
                 p1 = latLngs[i];
                 p2 = latLngs[(i + 1) % pointsCount];
                 area += ((p2.lng - p1.lng) * d2r) *
                         (2 + Math.sin(p1.lat * d2r) + Math.sin(p2.lat * d2r));
             }
-            area = area * 6378137.0 * 6378137.0 / 2.0;
+            area = area * EARTH_RADIUS * EARTH_RADIUS / 2.0;
         }
 
         return Math.abs(area);
