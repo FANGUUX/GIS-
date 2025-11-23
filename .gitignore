@@ -1,0 +1,20 @@
+# Local library files
+lib/
+
+# Log files
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

@@ -1,0 +1,258 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 60px 1fr;
+    height: 100vh;
+    gap: 0;
+}
+
+/* Header Styles */
+.header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.coordinates-display {
+    font-size: 14px;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: white;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+}
+
+.panel h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 8px;
+}
+
+.control-group {
+    margin-bottom: 24px;
+}
+
+.control-group h4 {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.control-group label {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.control-group label:hover {
+    background: #f5f7fa;
+}
+
+.control-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+.tool-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.tool-btn:active {
+    transform: translateY(0);
+}
+
+.tool-btn.danger {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.tool-btn.active {
+    background: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.info-panel {
+    background: #f5f7fa;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 60px;
+    color: #666;
+}
+
+/* Map Container */
+.map-container {
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+/* Leaflet Popup Customization */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.leaflet-popup-content {
+    margin: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Custom Marker Popup */
+.marker-popup {
+    min-width: 200px;
+}
+
+.marker-popup h4 {
+    color: #667eea;
+    margin-bottom: 8px;
+}
+
+.marker-popup p {
+    margin: 4px 0;
+    color: #666;
+}
+
+/* Scrollbar Styles */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px auto 1fr;
+    }
+    
+    .sidebar {
+        max-height: 300px;
+    }
+    
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .header h1 {
+        font-size: 18px;
+    }
+    
+    .coordinates-display {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+/* Loading Indicator */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #667eea;
+    z-index: 1000;
+}
+
+/* Measurement Line Style */
+.measurement-line {
+    stroke: #ff6b6b;
+    stroke-width: 3;
+    stroke-dasharray: 10, 5;
+}
+
+/* Tooltip */
+.map-tooltip {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+}
